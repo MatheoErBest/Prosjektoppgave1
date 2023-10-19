@@ -41,6 +41,11 @@ def screenUpdate():
     pygame.display.update()
     clock.tick(60)
 
+#meny verdier
+
+menuItems = ['Start game', 'Options', 'Exit']
+selectedItem = 0
+
 #main loop
 
 Running = True
@@ -49,14 +54,34 @@ while Running:
         if event.type == pygame.QUIT:
             Running = False
 
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_DOWN:
+                selectedItem = (selectedItem + 1) % len(menuItems)
+
+            elif event.key == pygame.K_UP:
+                selectedItem = (selectedItem - 1) % len(menuItems)
+
+            elif event.key == pygame.K_RETURN:
+                if selectedItem == 0:
+                    print("Start Game valgt")
+
+                elif selectedItem == 1:
+                    print("Options valgt")
+
+                elif selectedItem == 2:
+                    pygame.quit()
+                    sys.exit()
+
+
     #tegne menyen
     screen.fill((0, 0, 0))  # Sett bakgrunnsfargen
-    menu_font = pygame.font.Font(None, 36)
 
-    drawText("Main Menu", menu_font, (255, 255, 255), screenX // 2, 100)
-    drawText("Start Game", menu_font, (255, 255, 255), screenX // 2, 200)
-    drawText("Options", menu_font, (255, 255, 255), screenX // 2, 250)
-    drawText("Exit", menu_font, (255, 255, 255), screenX // 2, 300)
+    menu_font = pygame.font.Font(None, 36)
+    for i, item in enumerate(menuItems):
+        color = (255, 255, 255) if i == selectedItem else (128, 128, 128)
+        drawText(item, menu_font, color, screenX // 2, 200 + i * 50)
+
+
 
 
     screenUpdate()
