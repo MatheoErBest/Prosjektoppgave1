@@ -37,7 +37,6 @@ def drawText(text, font, color, x, y):
     screen.blit(text_surface, text_rect)
 
 def screenUpdate():
-    screen.fill((black))
     pygame.display.flip()
     pygame.display.update()
     clock.tick(60)
