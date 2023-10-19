@@ -56,7 +56,7 @@ while Running:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_DOWN:
-                selectedItem = (selectedItem + 1) % len(menuItems)
+                selectedItem  = (selectedItem + 1) % len(menuItems)
 
             elif event.key == pygame.K_UP:
                 selectedItem = (selectedItem - 1) % len(menuItems)
@@ -80,8 +80,6 @@ while Running:
     for i, item in enumerate(menuItems):
         color = (255, 255, 255) if i == selectedItem else (128, 128, 128)
         drawText(item, menu_font, color, screenX // 2, 200 + i * 50)
-
-
 
 
     screenUpdate()
