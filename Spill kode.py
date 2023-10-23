@@ -1,4 +1,5 @@
 import pygame, sys, os
+from pygame import mixer
 
 #sprite
 
@@ -27,6 +28,16 @@ green = (0, 255, 0)
 blue = (0, 0, 128)
 black = (0, 0, 0)
 red = (255, 0, 0)
+
+#musikk
+
+volume = 0.2
+mixer.init()
+mixer.music.load('franky.mp3')
+mixer.music.set_volume(volume)
+mixer.music.play()
+
+m1 = 1
 
 #funksjoner
 
@@ -71,7 +82,6 @@ while Running:
                 elif selectedItem == 2:
                     pygame.quit()
                     sys.exit()
-
 
     #tegne menyen
     screen.fill((0, 0, 0))  # Sett bakgrunnsfargen
