@@ -90,6 +90,10 @@ while Running:
                     elif selectedItem == 2:
                         pygame.quit()
                         sys.exit()
+                
+        elif in_options_menu == False:
+            if event.key == pygame.K_BACKSPACE:
+                in_options_menu == False
 
     #tegne menyen
     screen.fill((0, 0, 0))  # Sett bakgrunnsfargen
@@ -108,6 +112,7 @@ while Running:
         text = "Resolution: " + str(screenX) + "x" + str(screenY)
         drawText(text, sub_menu_font, (255, 255, 255), screenX // 2, 250)
         drawText("Press Backspace to go back", sub_menu_font, (255, 255, 255), screenX // 2, 300)
+
 
 
     screenUpdate()
