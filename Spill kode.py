@@ -36,8 +36,7 @@ mixer.init()
 mixer.music.load('franky.mp3')
 mixer.music.set_volume(volume)
 mixer.music.play()
-
-m1 = 1
+music_enabled = True
 
 #funksjoner
 
@@ -52,10 +51,17 @@ def screenUpdate():
     pygame.display.update()
     clock.tick(60)
 
+def changeRes():
+    global screenX, screenY
+    new_resolution = (screenX, screenY) if screenX != 900 else (1280, 720)
+    return new_resolution
+
+
 #meny verdier
 
 menuItems = ['Start game', 'Options', 'Exit']
 selectedItem = 0
+in_options_menu = False
 
 #main loop
 
@@ -65,31 +71,43 @@ while Running:
         if event.type == pygame.QUIT:
             Running = False
 
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_DOWN:
-                selectedItem  = (selectedItem + 1) % len(menuItems)
+        if not in_options_menu:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_DOWN:
+                    selectedItem  = (selectedItem + 1) % len(menuItems)
 
-            elif event.key == pygame.K_UP:
-                selectedItem = (selectedItem - 1) % len(menuItems)
+                elif event.key == pygame.K_UP:
+                    selectedItem = (selectedItem - 1) % len(menuItems)
 
-            elif event.key == pygame.K_RETURN:
-                if selectedItem == 0:
-                    print("Start Game valgt")
+                elif event.key == pygame.K_RETURN:
+                    if selectedItem == 0:
+                        print("Start Game valgt")
 
-                elif selectedItem == 1:
-                    print("Options valgt")
+                    elif selectedItem == 1:
+                        print("Options valgt")
+                        in_options_menu = True
 
-                elif selectedItem == 2:
-                    pygame.quit()
-                    sys.exit()
+                    elif selectedItem == 2:
+                        pygame.quit()
+                        sys.exit()
 
     #tegne menyen
     screen.fill((0, 0, 0))  # Sett bakgrunnsfargen
 
-    menu_font = pygame.font.Font(None, 36)
-    for i, item in enumerate(menuItems):
-        color = (255, 255, 255) if i == selectedItem else (128, 128, 128)
-        drawText(item, menu_font, color, screenX // 2, 200 + i * 50)
+    if not in_options_menu:
+        menu_font = pygame.font.Font(None, 36)
+        for i, item in enumerate(menuItems):
+            color = (255, 255, 255) if i == selectedItem else (128, 128, 128)
+            drawText(item, menu_font, color, screenX // 2, 200 + i * 50)
+
+    else:
+        # Display options sub-menu
+        sub_menu_font = pygame.font.Font(None, 36)
+        text = "Music: " + ("On" if music_enabled else "Off")
+        drawText(text, sub_menu_font, (255, 255, 255), screenX // 2, 200)
+        text = "Resolution: " + str(screenX) + "x" + str(screenY)
+        drawText(text, sub_menu_font, (255, 255, 255), screenX // 2, 250)
+        drawText("Press Backspace to go back", sub_menu_font, (255, 255, 255), screenX // 2, 300)
 
 
     screenUpdate()
