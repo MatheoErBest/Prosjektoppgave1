@@ -72,14 +72,18 @@ while Running:
             Running = False
 
         if not in_options_menu:
+            
             if event.type == pygame.KEYDOWN:
+
                 if event.key == pygame.K_DOWN:
-                    selectedItem  = (selectedItem + 1) % len(menuItems)
+
+                    selectedItem = (selectedItem + 1) % len(menuItems)
 
                 elif event.key == pygame.K_UP:
                     selectedItem = (selectedItem - 1) % len(menuItems)
 
                 elif event.key == pygame.K_RETURN:
+
                     if selectedItem == 0:
                         print("Start Game valgt")
 
@@ -90,10 +94,12 @@ while Running:
                     elif selectedItem == 2:
                         pygame.quit()
                         sys.exit()
-                
-        elif in_options_menu == False:
-            if event.key == pygame.K_BACKSPACE:
-                in_options_menu == False
+
+        elif in_options_menu:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    in_options_menu = False  # Set in_options_menu to False to exit the options menu
+
 
     #tegne menyen
     screen.fill((0, 0, 0))  # Sett bakgrunnsfargen
