@@ -59,6 +59,8 @@ def changeRes():
 
 #meny verdier
 
+optionMenuItem = ['resolutuion', 'Music']
+selectedOptionItem = 0
 menuItems = ['Start game', 'Options', 'Exit']
 selectedItem = 0
 in_options_menu = False
@@ -72,7 +74,7 @@ while Running:
             Running = False
 
         if not in_options_menu:
-            
+
             if event.type == pygame.KEYDOWN:
 
                 if event.key == pygame.K_DOWN:
@@ -102,23 +104,24 @@ while Running:
 
 
     #tegne menyen
-    screen.fill((0, 0, 0))  # Sett bakgrunnsfargen
+    screen.fill((0, 0, 0))  # Set the background color
 
     if not in_options_menu:
         menu_font = pygame.font.Font(None, 36)
         for i, item in enumerate(menuItems):
             color = (255, 255, 255) if i == selectedItem else (128, 128, 128)
             drawText(item, menu_font, color, screenX // 2, 200 + i * 50)
+            drawText("Use Arrow Keys To Navigate And Enter To Choose", menu_font, (128, 128, 128), screenX // 2, 400)
 
     else:
         # Display options sub-menu
-        sub_menu_font = pygame.font.Font(None, 36)
-        text = "Music: " + ("On" if music_enabled else "Off")
-        drawText(text, sub_menu_font, (255, 255, 255), screenX // 2, 200)
-        text = "Resolution: " + str(screenX) + "x" + str(screenY)
-        drawText(text, sub_menu_font, (255, 255, 255), screenX // 2, 250)
-        drawText("Press Backspace to go back", sub_menu_font, (255, 255, 255), screenX // 2, 300)
+        sub_menu_font = menu_font
+        for i, item in enumerate(optionMenuItem):
+            color = (255, 255, 255) if i == selectedOptionItem else (128, 128, 128)
+            drawText(item, sub_menu_font, color, screenX // 2, 200 + i * 50)
 
+            drawText("Press Backspace to go back", sub_menu_font, (128, 128, 128), screenX // 2, 400)
+                    
 
 
     screenUpdate()
