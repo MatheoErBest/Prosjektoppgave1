@@ -59,7 +59,7 @@ def changeRes():
 
 #meny verdier
 
-optionMenuItem = ['resolutuion', 'Music']
+optionMenuItem = ['Resolutuion', 'Music ON/OFF']
 selectedOptionItem = 0
 menuItems = ['Start game', 'Options', 'Exit']
 selectedItem = 0
@@ -99,23 +99,46 @@ while Running:
 
         elif in_options_menu:
             if event.type == pygame.KEYDOWN:
+
+                if event.key == pygame.K_DOWN:
+                    selectedOptionItem = (selectedOptionItem + 1) % len(optionMenuItem)
+                
+                if event.key == pygame.K_UP:
+                    selectedOptionItem = (selectedOptionItem - 1) % len(optionMenuItem)
+
+                if event.key == pygame.K_RETURN:
+                    
+                    if selectedOptionItem == 1:
+                        music_enabled = not music_enabled
+
+                        if music_enabled:
+                            mixer.music.unpause()
+
+                        else:
+                            mixer.music.pause()
+
+                    elif selectedOptionItem == 0:
+                        screenX, screenY = changeRes()
+                        screen = pygame.display.set_mode((screenX, screenY))
+                        
+
                 if event.key == pygame.K_BACKSPACE:
                     in_options_menu = False  # Set in_options_menu to False to exit the options menu
 
 
     #tegne menyen
-    screen.fill((0, 0, 0))  # Set the background color
+    screen.fill((0, 0, 0))
 
     if not in_options_menu:
         menu_font = pygame.font.Font(None, 36)
         for i, item in enumerate(menuItems):
             color = (255, 255, 255) if i == selectedItem else (128, 128, 128)
             drawText(item, menu_font, color, screenX // 2, 200 + i * 50)
-            drawText("Use Arrow Keys To Navigate And Enter To Choose", menu_font, (128, 128, 128), screenX // 2, 400)
+            drawText("Use UP / Down Arrow Keys To Navigate And Enter To Choose", menu_font, (128, 128, 128), screenX // 2, 400)
 
     else:
         # Display options sub-menu
-        sub_menu_font = menu_font
+        sub_menu_font = pygame.font.Font(None, 36)
         for i, item in enumerate(optionMenuItem):
             color = (255, 255, 255) if i == selectedOptionItem else (128, 128, 128)
             drawText(item, sub_menu_font, color, screenX // 2, 200 + i * 50)
