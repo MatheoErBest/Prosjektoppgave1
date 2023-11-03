@@ -8,7 +8,7 @@ class Player(pygame.sprite.Sprite):
     def __init__():
         super().__init__()
 
-    #meny
+
 
 
 #display
@@ -123,9 +123,7 @@ while Running:
                         
 
                 if event.key == pygame.K_BACKSPACE:
-                    in_options_menu = False  # Set in_options_menu to False to exit the options menu
-
-
+                    in_options_menu = False
     #tegne menyen
     screen.fill((0, 0, 0))
 
@@ -137,7 +135,6 @@ while Running:
             drawText("Use UP / Down Arrow Keys To Navigate And Enter To Choose", menu_font, (128, 128, 128), screenX // 2, 400)
 
     else:
-        # Display options sub-menu
         sub_menu_font = pygame.font.Font(None, 36)
         for i, item in enumerate(optionMenuItem):
             color = (255, 255, 255) if i == selectedOptionItem else (128, 128, 128)
