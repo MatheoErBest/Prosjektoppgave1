@@ -1,7 +1,5 @@
 # Prosjektoppgave1
-I denne oppgaven vil jeg begyne på et spill i python
-Jeg vil at det skal innholde:
- - En interaktiv meny
- - En sprite som beveger på seg
- - En bakrund som holder seg i en lock mens karakteren beveger på seg
-
+I dette prosjektet har jeg lagd en simpel meny som kan
+man kan navigere med piltastene og enter knappen, jeg har
+lagd en options meny innen for hovedmenyen som lar deg skru av/på musikken
+og bytte vindu størrelse.
